@@ -29,10 +29,11 @@ class MyHandler(FileSystemEventHandler):
     def find_action_script(self, event):
         if os.path.isfile(event.src_path):
             script_type = "file"
+            action_script = os.path.join(os.path.dirname(event.src_path),".actions", "_" + script_type + "_" + event.event_type +".py")
         else:
             script_type = "dir"
+            action_script = os.path.join(event.src_path,".actions", "_" + script_type + "_" + event.event_type +".py")        
         
-        action_script = os.path.join(os.path.dirname(event.src_path),".actions", "_" + script_type + "_" + event.event_type +".py")
         
         print "looking for action script %s..." % action_script
         
